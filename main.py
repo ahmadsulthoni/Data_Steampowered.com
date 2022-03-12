@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import panda as pd
+import pandas as pd
 
 url = 'https://store.steampowered.com/search/?term=gta'
 
@@ -13,5 +13,8 @@ def get_data(url):
 def parse(data):
     result = []
     soup = BeautifulSoup(data, 'html.parser')
+    contents = soup.find('div',attrs={id:'search_resultsRows'})
+    games = contents.find_all('a')
 
+    print(result)
 
