@@ -13,8 +13,39 @@ def get_data(url):
 def parse(data):
     result = []
     soup = BeautifulSoup(data, 'html.parser')
-    contents = soup.find('div',attrs={id:'search_resultsRows'})
+    contents = soup.find('div',attrs={'id' : 'search_resultsRows'})
     games = contents.find_all('a')
 
-    print(result)
+    for game in games:
+        link = game['href']
+
+        #parsing data
+        title = game.find('span', {'class':'title'}).text.strip('$')
+        price = game.find('div',{'class': 'search_price'}).text.strip('$')
+
+        #sorting_data
+        data_dict = {
+            'title' : title,
+            'price' : price,
+            'link' : link,
+        }
+
+        #append untuk menampung data
+        result.append(data_dict)
+    return result
+
+#proses cleaned data from parser
+def output (datas : list):
+    for i in datas:
+        print(i)
+
+
+if __name__ == '__main__':
+    data = get_data(url)
+
+    final_data = parse(data)
+
+    output(final_data)
+
+
 
