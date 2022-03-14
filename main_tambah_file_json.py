@@ -44,7 +44,7 @@ def parse(data):
         result.append(data_dict)
     return result
 #writing json
-    with open ('json_result','w') as outfile:
+    with open ('json_result','w+') as outfile:
         json.dump(result,outfile)
     return result
 
