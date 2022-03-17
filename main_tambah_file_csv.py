@@ -48,10 +48,16 @@ def parse(data):
 def output (datas : list):
     for i in datas:
         print(i)
+
 def generate_data(result, filename):
-    df = pd.DataFrame(result)
-    df.to_csv(f'{filename}.csv', index=False)
-    df.to_excel(f'{filename}.xlsx', index=False)
+try:
+    os.mkdir('data_result')
+except FileExistsError:
+    pass
+
+df = pd.DataFrame(result)
+df.to_csv(f'data_result/{filename}.csv', index=False)
+df.to_excel(f'data_result/{filename}.xlsx', index=False)
 
 
 if __name__ == '__main__':
